@@ -1,0 +1,37 @@
+<div class="wrapper" *ngIf="movie">
+    <!-- <img [src]="utils.generateDestinationImage(flight.destination)">
+    <pre>{{flight | json}}</pre> -->
+    <h1 style="margin-top: 80px; ">{{movie.title}}</h1>
+
+    <div class="movie-container">
+        <img [src]="movie.poster">
+        <mat-card appearance="outlined" class="movie-card">
+            <mat-card-content>
+                <h3>Detalji filma</h3>
+                <mat-list role="list">
+                    <p style="padding-left: 20px; color: lightgray; font-kerning: normal;">Opis Filma: <br><pre></pre>&emsp;{{movie.description}}</p>
+                    <mat-list-item>Zanr:
+                        <span *ngFor="let genre of movie.movieGenres; let last = last">
+                            {{ genre.genre.name }}<span *ngIf="!last">, </span>
+                        </span></mat-list-item>
+                    <mat-list-item>Trajanje: {{movie.runTime}} min.</mat-list-item>
+                    <mat-list-item>Reziser: {{movie.director.name}}</mat-list-item>
+                    <mat-list-item>Glumci:
+                        <span *ngFor="let actor of movie.movieActors; let last = last">
+                            {{ actor.actor.name }}<span *ngIf="!last">, </span>
+                        </span></mat-list-item>
+                        <mat-list-item>Film Izasao: {{utils.formatDate(movie.createdAt)}}</mat-list-item>
+                        <mat-list-item>Datum Projekcije: {{utils.formatDateTime(movie.startDate)}}</mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <a mat-button [routerLink]="['/details/'+movie.movieId+'/order']">
+                    <i class="fa-solid fa-cart-shopping"></i> Book Now
+                </a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</div>
+
+<app-loading *ngIf="!movie" />

@@ -7,11 +7,12 @@ export class UtilsService {
 
   constructor() { }
 
-  public formatDate(iso: string) {
+  public formatDateTime(iso: string) {
     return new Date(iso).toLocaleString('sr-RS')
   }
 
-//   public generateDestinationImage(dest: string) {
-//     return `https://img.pequla.com/destination/${dest.split(' ')[0].toLocaleLowerCase()}.jpg`
-//   }
+  public formatDate(iso: string) {
+    return new Date(iso).toLocaleDateString('sr-RS');
+}
+
 }

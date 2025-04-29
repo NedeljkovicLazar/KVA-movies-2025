@@ -13,18 +13,18 @@ const client = axios.create({
     }
 })
 
+
 export class MovieService {
-    static async getMovies(page: number = 0, size: number = 10) {
+    static async getMovies(page: number = 0) {
         return client.request({
-            url: '/movie',
-            method: 'GET',
-            params: {
-                'page': page,
-                'size': size,
-                'sort': 'startDate,asc',
-                'active': true
-            }
-        })
+        url: '/movie',
+        method: 'GET',
+        params: {
+            'page': page,
+            'sort': 'startDate,asc',
+            'active': true
+        }
+    })
     }
 
     static async getMovieById(id: number) {

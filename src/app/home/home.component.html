@@ -1,11 +1,51 @@
-<div *ngIf="error">
-    <h3>Oops, an error occured!</h3>
-    <p style="color: red;">{{error}}</p>
+<div *ngIf="error && true" class="container" style="justify-content: center;">
+    <mat-card class="loading" appearance="outlined" color="red">
+        <mat-card-content>
+            <h1>Oops, an error occured!</h1>
+            <p style="color: red;">{{error}}</p>
+        </mat-card-content>
+    </mat-card>
 </div>
 
-<div *ngIf="movies">
+<!-- <div *ngIf="movies">
     <p *ngFor="let movie of movies">{{movie.startDate}} {{movie.title}}</p>
-    <!-- <pre>{{movies | json}}</pre> -->
+    <pre>{{movies | json}}</pre>
+</div> -->
+
+<div *ngIf="movies" class="container">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let movie of movies">
+        <img mat-card-image [src]="movie.poster">
+        <mat-card-content>
+            <h1>{{movie.title}}</h1>
+            <p>Opis: {{movie.shortDescription}}</p>
+            <p>Zanr: 
+                <span *ngFor="let genre of movie.movieGenres; let last = last">
+                    {{ genre.genre.name }}<span *ngIf="!last">, </span>
+                </span>
+            </p>
+            <p>Trajanje: {{movie.runTime}} min.</p>
+            <p>Reziser: {{movie.director.name}}</p>
+            <p>Glumci: 
+                <span *ngFor="let actor of movie.movieActors; let last = last">
+                    {{ actor.actor.name }}<span *ngIf="!last">, </span>
+                </span>
+            </p>
+            <p>Film Izasao: {{utils.formatDate(movie.createdAt)}}</p>
+            <p>Projekcija: {{utils.formatDateTime(movie.startDate)}}</p>
+            <p>Cena Karte: 549.99 din</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button [routerLink]="['/details/', movie.movieId]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Detalji
+            </a>
+            <a mat-button [routerLink]="['/details/'+movie.movieId+'/order']">
+                <i class="fa-solid fa-cart-shopping"></i> Rezervisi
+            </a>
+            <a mat-button>
+                <i class="fa-solid fa-comments"></i> Recenzije
+            </a>
+        </mat-card-actions>
+    </mat-card>
 </div>
 
 <app-loading *ngIf="!movies && !error" />
