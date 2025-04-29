@@ -1,5 +1,31 @@
 <div class="wrapper" *ngIf="dataSource">
     <h1>Search</h1>
+    <mat-card class="search-card">
+      <mat-card-content>
+          <div class="search-input-row">
+              <mat-form-field class="search-input">
+                  <mat-label>Search</mat-label>
+                  <input type="text" matInput placeholder="Enter search criteria" (keyup)="doFilterChain()"
+                      [(ngModel)]="userInput">
+              </mat-form-field>
+          </div>
+          <div class="search-input-row">
+              <mat-form-field class="search-input">
+                  <mat-label>Select Date</mat-label>
+                  <mat-select (selectionChange)="doFilterChain()" [(ngModel)]="selectedDate">
+                      <mat-option *ngFor="let date of dateOptions" [value]="date">
+                          {{date}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+          </div>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-button (click)="doReset()">
+              <i class="fa-solid fa-ban"></i> Reset all search criteria
+          </button>
+      </mat-card-actions>
+  </mat-card>
     <table mat-table [dataSource]="dataSource">
   
       <ng-container matColumnDef="id">

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { MovieModel } from '../models/movie.model'
 
 const client = axios.create({
     baseURL: 'https://movie.pequla.com/api',
@@ -26,6 +27,18 @@ export class MovieService {
         }
     })
     }
+
+    static async getAllMovies(pages: number = 3) {
+        const results: MovieModel[] = []
+      
+        for (let i = 0; i < pages; i++) {
+          const rsp = await MovieService.getMovies(i)
+          results.push(...rsp.data)
+        }
+      
+        return results
+      }
+      
 
     static async getMovieById(id: number) {
         return client.get(`/movie/${id}`)

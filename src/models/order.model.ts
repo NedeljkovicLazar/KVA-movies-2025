@@ -1,5 +1,6 @@
 export interface OrderModel {
-    movieId: number
+    id: number
+    movieID: number
     title: string
     startDate: string
     count: number

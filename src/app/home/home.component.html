@@ -17,20 +17,8 @@
         <img mat-card-image [src]="movie.poster">
         <mat-card-content>
             <h1>{{movie.title}}</h1>
-            <p>Opis: {{movie.shortDescription}}</p>
-            <p>Zanr: 
-                <span *ngFor="let genre of movie.movieGenres; let last = last">
-                    {{ genre.genre.name }}<span *ngIf="!last">, </span>
-                </span>
-            </p>
+            <p>Opis: <br>{{movie.shortDescription}}</p>
             <p>Trajanje: {{movie.runTime}} min.</p>
-            <p>Reziser: {{movie.director.name}}</p>
-            <p>Glumci: 
-                <span *ngFor="let actor of movie.movieActors; let last = last">
-                    {{ actor.actor.name }}<span *ngIf="!last">, </span>
-                </span>
-            </p>
-            <p>Film Izasao: {{utils.formatDate(movie.createdAt)}}</p>
             <p>Projekcija: {{utils.formatDateTime(movie.startDate)}}</p>
             <p>Cena Karte: 549.99 din</p>
         </mat-card-content>
